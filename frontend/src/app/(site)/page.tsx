@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
-import { HomeCta } from '@/features/home/components/HomeCta';
+import { WaveDivider } from '@/components/sections/WaveDivider';
+import { HomeFinalCta } from '@/features/home/components/HomeFinalCta';
 import { HomeHero } from '@/features/home/components/HomeHero';
+import { HomePhilosophy } from '@/features/home/components/HomePhilosophy';
+import { HomeTrustBar } from '@/features/home/components/HomeTrustBar';
+import { HomeLocations } from '@/features/locations/components/HomeLocations';
+import { HomePlanBanner } from '@/features/plans/components/HomePlanBanner';
+import { HomeServices } from '@/features/services/components/HomeServices';
 
 export const metadata: Metadata = {
   title: 'Clínica Veterinaria en Guayaquil',
@@ -12,7 +18,14 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
-      <HomeCta />
+      <HomeTrustBar />
+      <WaveDivider className="mt-12 bg-canvas text-canvas-alt" />
+      <HomeServices />
+      <WaveDivider variant="top" className="-mt-1 bg-canvas-alt text-white" />
+      <HomePhilosophy />
+      <HomePlanBanner />
+      <HomeLocations />
+      <HomeFinalCta />
     </>
   );
 }

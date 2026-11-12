@@ -1,92 +1,183 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { LOCATIONS } from '@/config/contact';
-import { FOOTER_NAV, LEGAL_NAV } from '@/config/navigation';
+import { ArrowRight, Facebook, Globe, Instagram, MapPin, Music2, Youtube } from 'lucide-react';
+import { CONTACT, EMERGENCY_CONTACTS, LOCATIONS } from '@/config/contact';
+import { FOOTER_EXPLORE_LINKS, FOOTER_SERVICE_LINKS, LEGAL_NAV } from '@/config/navigation';
 import { siteConfig } from '@/config/site';
 import { SOCIAL_LINKS } from '@/config/social';
 
+const SOCIAL_ICONS = {
+  Instagram,
+  Facebook,
+  YouTube: Youtube,
+  TikTok: Music2,
+  X: Globe,
+} as const;
+
 export function Footer() {
   return (
-    <footer className="bg-brand-gray text-white">
-      <div className="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.4fr]">
-        <div>
-          <p className="font-display text-2xl font-bold">Dr. Pet</p>
-          <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/70">
-            {siteConfig.description}
-          </p>
-          <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm">
-            {SOCIAL_LINKS.map((link) => (
-              <li key={link.name}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-white/70 transition-colors hover:text-brand-yellow"
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <footer className="border-t-4 border-accent bg-primary text-white">
+      <div className="container-page pb-24 pt-16 md:pb-12">
+        <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-5">
+          <div className="flex flex-col items-start lg:col-span-2">
+            <div className="mb-4 inline-flex rounded-2xl bg-white px-4 py-2 shadow-md">
+              <Image
+                src="/images/brand/logo.png"
+                alt="Dr. Pet — Clínica Veterinaria"
+                width={451}
+                height={232}
+                className="h-9 w-auto"
+              />
+            </div>
 
-        {FOOTER_NAV.map((group) => (
-          <nav key={group.title} aria-label={group.title}>
-            <h2 className="text-sm font-semibold text-brand-yellow">{group.title}</h2>
-            <ul className="mt-4 space-y-2 text-sm">
-              {group.items.map((item) => (
+            <p className="mb-3 text-lg font-bold italic text-accent">“{siteConfig.tagline}”</p>
+            <p className="mb-6 max-w-sm text-xs leading-relaxed text-white/80 sm:text-sm">
+              {siteConfig.description}
+            </p>
+
+            <p className="flex items-center gap-2 text-xs text-white/70">
+              <MapPin className="h-4 w-4 text-accent" aria-hidden="true" />
+              Guayaquil, Ecuador
+            </p>
+
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {SOCIAL_LINKS.map((link) => {
+                const Icon = SOCIAL_ICONS[link.name as keyof typeof SOCIAL_ICONS] ?? Globe;
+
+                return (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={link.name}
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-accent hover:text-accent-foreground"
+                    >
+                      <Icon className="h-4 w-4" aria-hidden="true" />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="mb-4 border-b border-white/10 pb-1 text-sm font-bold uppercase tracking-wider text-white">
+              Servicios Clínicos
+            </h2>
+            <ul className="space-y-2 text-xs text-white/80">
+              {FOOTER_SERVICE_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-white/70 transition-colors hover:text-white"
+                    className={
+                      item.href === '/emergencias'
+                        ? 'flex items-center gap-1.5 font-bold text-accent hover:underline'
+                        : 'transition-colors hover:text-accent'
+                    }
                   >
+                    {item.title}
+                    {item.href === '/emergencias' && (
+                      <span
+                        className="h-1.5 w-1.5 rounded-full bg-destructive"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="mb-4 border-b border-white/10 pb-1 text-sm font-bold uppercase tracking-wider text-white">
+              Nuestras Sedes
+            </h2>
+            <div className="space-y-3.5 text-xs text-white/80">
+              {LOCATIONS.map((location) => (
+                <div key={location.slug}>
+                  <Link
+                    href={`/sedes/${location.slug}`}
+                    className="font-bold text-white transition-colors hover:text-accent"
+                  >
+                    {location.name}
+                  </Link>
+                  <p className="text-white/60">{location.address}</p>
+                </div>
+              ))}
+              <Link
+                href="/plan-consentido-protegido"
+                className="inline-flex items-center gap-1 pt-1 font-bold text-accent hover:underline"
+              >
+                Plan Consentido Anual
+                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="mb-4 border-b border-white/10 pb-1 text-sm font-bold uppercase tracking-wider text-white">
+              Contacto Central
+            </h2>
+            <div className="mb-5 space-y-2.5 text-xs text-white/80">
+              <p>
+                <span className="block text-white/50">Teléfono PBX:</span>
+                <a
+                  href={`tel:${CONTACT.mainPhone.tel}`}
+                  className="text-sm font-bold text-white transition-colors hover:text-accent"
+                >
+                  {CONTACT.mainPhone.display}
+                </a>
+              </p>
+              <p>
+                <span className="block text-white/50">WhatsApp:</span>
+                <a
+                  href={CONTACT.primaryWhatsApp.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm font-bold text-accent transition-colors hover:text-white"
+                >
+                  {CONTACT.primaryWhatsApp.internationalDisplay}
+                </a>
+              </p>
+              {EMERGENCY_CONTACTS.map((contact) => (
+                <p key={contact.label}>
+                  <span className="block text-white/50">{contact.label}:</span>
+                  <a
+                    href={`tel:${contact.tel}`}
+                    className="font-bold text-white transition-colors hover:text-accent"
+                  >
+                    {contact.display}
+                  </a>
+                </p>
+              ))}
+            </div>
+
+            <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-white">Explora</h3>
+            <ul className="grid grid-cols-2 gap-2 text-xs text-white/80">
+              {FOOTER_EXPLORE_LINKS.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="transition-colors hover:text-accent">
                     {item.title}
                   </Link>
                 </li>
               ))}
             </ul>
-          </nav>
-        ))}
-
-        <div>
-          <h2 className="text-sm font-semibold text-brand-yellow">Sedes</h2>
-          <ul className="mt-4 space-y-4 text-sm">
-            {LOCATIONS.map((location) => (
-              <li key={location.slug}>
-                <p className="font-medium text-white">{location.name}</p>
-                <p className="mt-1 text-white/70">{location.address}</p>
-                {location.phone && location.phoneTel && (
-                  <a
-                    href={`tel:${location.phoneTel}`}
-                    className="mt-1 inline-block text-white/80 transition-colors hover:text-brand-yellow"
-                  >
-                    {location.phone}
-                  </a>
-                )}
-                <a
-                  href={`tel:${location.emergencyTel}`}
-                  className="mt-1 block text-white/80 transition-colors hover:text-brand-yellow"
-                >
-                  Emergencias: {location.emergencyPhone}
-                </a>
-              </li>
-            ))}
-          </ul>
+          </div>
         </div>
-      </div>
 
-      <div className="border-t border-white/10">
-        <div className="container-page flex flex-col gap-3 py-5 text-xs text-white/70 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Dr. Pet. Todos los derechos reservados.</p>
-          <ul className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-col gap-4 pt-8 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Dr. Pet Clínica Veterinaria Guayaquil.</p>
+          <div className="flex flex-wrap items-center gap-6">
             {LEGAL_NAV.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="transition-colors hover:text-brand-yellow">
-                  {item.title}
-                </Link>
-              </li>
+              <Link key={item.href} href={item.href} className="transition-colors hover:text-white">
+                {item.title}
+              </Link>
             ))}
-            <li>Guayaquil, Ecuador</li>
-          </ul>
+            <Link href="/contacto" className="transition-colors hover:text-white">
+              Atención al cliente
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

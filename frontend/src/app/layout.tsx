@@ -1,17 +1,12 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
+import { Lato } from 'next/font/google';
 import { siteConfig } from '@/config/site';
 import './globals.css';
 
-const inter = Inter({
+const lato = Lato({
   subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-plus-jakarta',
+  weight: ['400', '700', '900'],
+  variable: '--font-lato',
   display: 'swap',
 });
 
@@ -56,7 +51,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-EC" className={`${inter.variable} ${plusJakarta.variable}`}>
+    <html lang="es-EC" className={lato.variable}>
       <body>
         <a
           href="#contenido"

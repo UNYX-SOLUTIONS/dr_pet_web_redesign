@@ -11,16 +11,22 @@ export interface ContactLocation {
 }
 
 export const CONTACT = {
+  mainPhone: {
+    display: '(04) 288-6519',
+    tel: '+59342886519',
+  },
   primaryWhatsApp: {
     display: '098 636 3000',
+    internationalDisplay: '+593 98 636 3000',
     url: 'https://wa.me/593986363000',
   },
+  planBrochureUrl: 'https://drpet.com.ec/wp-content/uploads/2020/08/DrPet_Final.pdf',
 } as const;
 
 export const EMERGENCY_CONTACTS = [
   { label: 'Urdesa', display: '098 636 3000', tel: '+593986363000' },
   { label: 'El Dorado', display: '096 252 3743', tel: '+593962523743' },
-  { label: 'Vía a la Costa', display: '098 775 3422', tel: '+593987753422' },
+  { label: 'Vía a la Costa', display: '099 841 7725', tel: '+593998417725' },
 ] as const;
 
 export const LOCATIONS: ContactLocation[] = [
@@ -52,11 +58,11 @@ export const LOCATIONS: ContactLocation[] = [
     slug: 'via-a-la-costa',
     name: 'Vía a la Costa',
     address: 'Km 9.8 vía a la Costa, frente a Puerto Azul, plaza comercial junto al Portal',
-    phone: null,
-    phoneTel: null,
-    emergencyPhone: '098 775 3422',
-    emergencyTel: '+593987753422',
-    whatsappUrl: 'https://wa.me/593987753422',
+    phone: '099 504 8598',
+    phoneTel: '+593995048598',
+    emergencyPhone: '099 841 7725',
+    emergencyTel: '+593998417725',
+    whatsappUrl: 'https://wa.me/593995048598',
     mapsUrl:
       'https://www.google.com/maps/search/?api=1&query=Dr.+Pet+Via+a+la+Costa+Puerto+Azul+Guayaquil',
   },

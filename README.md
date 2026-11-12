@@ -11,6 +11,8 @@ Rediseño del sitio de **Dr. Pet, Clínica Veterinaria** (Guayaquil, Ecuador). E
 - `framer-motion`, `embla-carousel-react`, `sonner`
 - `react-hook-form` + `zod`
 - `zustand`
+- Lato con `next/font`
+- `sharp` para optimización de imágenes
 - pnpm workspace
 
 ## Requisitos
@@ -80,8 +82,10 @@ La arquitectura completa, el contexto del negocio, la paleta oficial y el roadma
 - [x] Estructura de carpetas
 - [x] Configuración de Next.js, TypeScript, Tailwind, ESLint y Prettier
 - [x] Tokens de marca (Sapphire Blue, Buttercup Yellow, Gunmetal Gray)
-- [x] Layout público: barra de emergencias, header, footer y WhatsApp
-- [x] Home inicial con hero y CTA
+- [x] Layout público: top bar, header con mega-menú, footer y WhatsApp flotante
+- [x] Home completa: hero orgánico, trust bar, servicios bento, filosofía, plan, sucursales y CTA final
+- [x] Divisores wave, geometría orgánica y tipografía Lato
+- [x] Datos mock de home, servicios, plan y sucursales
 - [ ] Páginas internas y datos mock completos
 - [ ] Formularios y flujo de agendamiento
 - [ ] SEO técnico y JSON-LD
@@ -90,4 +94,6 @@ La arquitectura completa, el contexto del negocio, la paleta oficial y el roadma
 
 - No hay backend ni autenticación. Los formularios se simularán con datos mock.
 - Los teléfonos y enlaces de sedes están centralizados en `frontend/src/config/contact.ts`.
+- Los beneficios y el costo del Plan Consentido Protegido se tomaron del sitio oficial.
+- Los horarios por sede y la disponibilidad de emergencias 24/7 deben validarse con el cliente.
 - El logo actual es un PNG; se solicitó la versión SVG oficial para unificar el azul de marca.

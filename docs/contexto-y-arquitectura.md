@@ -56,11 +56,11 @@ El objetivo del rediseño es construir una experiencia moderna, mobile-first y o
 |---|---|---|---|
 | Urdesa | Circunvalación Sur 216 entre Todos los Santos y Calle Única | 098 636 3000 | 098 636 3000 |
 | El Dorado | Km 10.5 vía La Aurora, Ciudad Comercial El Dorado | 099 276 2265 | 096 252 3743 |
-| Vía a la Costa | Km 9.8 vía a La Costa, frente a Puerto Azul, plaza comercial junto al Portal | — | 098 775 3422 |
+| Vía a la Costa | Km 9.8 vía a La Costa, frente a Puerto Azul, plaza comercial junto al Portal | 099 504 8598 / 098 775 3422 | 099 841 7725 |
 
-Redes: Facebook, Instagram, YouTube, TikTok y X. Todos los enlaces y números deben centralizarse en configuración para evitar duplicidad y errores.
+Redes: Facebook, Instagram, YouTube, TikTok y X. Todos los enlaces y números deben centralizarse en configuración para evitar duplicidad y errores. El PBX general es `(04) 288-6519`.
 
-> **Validar con el cliente:** horarios por sede, correos, disponibilidad real de emergencias 24/7, números de WhatsApp definitivos y política de citas.
+> **Validar con el cliente:** horarios por sede, correos, disponibilidad real de emergencias 24/7, números de WhatsApp definitivos y política de citas. El sitio actual muestra números distintos para Vía a la Costa; se priorizó el dato de la página de contacto.
 
 ### 2.4 Público objetivo
 
@@ -107,12 +107,18 @@ La paleta se toma del manual de marca de Dr. Pet. Los colores del logo (naranja 
 | Token | Hex | HSL | Uso |
 |---|---|---|---|
 | `--brand-blue` — Sapphire Blue | `#2A53A0` | `219 58% 40%` | Color primario: header, CTAs, enlaces, fondos de confianza |
-| `--brand-blue-dark` | `#1E3D78` | `219 60% 29%` | Hover y estados activos (derivado) |
+| `--brand-blue-deep` | `#1B3B7A` | `220 64% 29%` | Top bar, gradientes y estados activos |
+| `--brand-blue-light` | `#EBF1FA` | `216 58% 95%` | Chips, iconos y fondos suaves |
+| `--brand-blue-soft` | `#DCE7F7` | `216 61% 92%` | Superficies de apoyo |
 | `--brand-yellow` — Buttercup Yellow | `#F6EC3F` | `57 91% 61%` | Acentos, highlights, badges y bloques de energía |
-| `--brand-gray` — Gunmetal Gray | `#3F3F3F` | `0 0% 25%` | Texto principal, footer y barra de emergencias |
+| `--brand-yellow-hover` | `#EBDC1F` | `55 84% 52%` | Hover de CTAs amarillos |
+| `--brand-yellow-tint` | `#FFFDE6` | `58 100% 95%` | Fondos cálidos y tarjetas destacadas |
+| `--brand-gray` — Gunmetal Gray | `#3F3F3F` | `0 0% 25%` | Texto principal, footer y superficies oscuras |
 | `--brand-white` — Pure White | `#FFFFFF` | `0 0% 100%` | Fondos base y superficies |
-| `--surface` | `#FBF9EC` | `57 65% 96%` | Fondo cálido derivado del amarillo |
-| `--border` | `#E6E6E6` | `0 0% 90%` | Bordes y divisores (derivado) |
+| `--canvas` | `#F8FAFD` | `216 71% 98%` | Fondo general de la home |
+| `--canvas-alt` | `#F4F7FC` | `214 57% 97%` | Secciones alternas |
+| `--surface` | `#FBF9EC` | `57 65% 96%` | Tinte cálido de apoyo |
+| `--border` | `#E6E6E6` | `0 0% 90%` | Bordes y divisores |
 | `--state-error` | `#B42318` | `4 76% 40%` | Errores de formulario; no es color de marca |
 
 Reglas de uso:
@@ -120,18 +126,26 @@ Reglas de uso:
 - **Buttercup Yellow** es color de fondo o acento, nunca de texto sobre blanco. El texto sobre amarillo debe ser Gunmetal Gray.
 - **Gunmetal Gray** reemplaza al negro puro en texto y superficies oscuras.
 - **Pure White** domina las superficies; el amarillo aporta calidez en dosis controladas.
-- **Rojo** se reserva para errores de validación; no se introduce como color de marca.
-- **Emergencias:** barra Gunmetal con texto blanco y CTA Buttercup. No usar rojo como color de marca.
+- **Rojo:** se usa solo como color funcional para urgencias y errores; no forma parte de la paleta de marca.
+- **Emergencias:** pill de urgencias en el header y botón flotante de WhatsApp. No usar rojo en superficies grandes.
 - Validar contraste AA en todas las combinaciones antes de implementar.
+
+La home evolucionó a una composición orgánica con Lato, divisores wave y retícula bento, manteniendo estos tokens oficiales. Los beneficios del plan, teléfonos y sedes se tomaron del sitio oficial.
 
 Tokens base para `globals.css` (formato HSL compatible con Tailwind/shadcn):
 
 ```css
 :root {
   --brand-blue: 219 58% 40%;       /* #2A53A0 */
-  --brand-blue-dark: 219 60% 29%;  /* #1E3D78 */
+  --brand-blue-deep: 220 64% 29%;  /* #1B3B7A */
+  --brand-blue-light: 216 58% 95%; /* #EBF1FA */
+  --brand-blue-soft: 216 61% 92%;  /* #DCE7F7 */
   --brand-yellow: 57 91% 61%;      /* #F6EC3F */
+  --brand-yellow-hover: 55 84% 52%;/* #EBDC1F */
+  --brand-yellow-tint: 58 100% 95%;/* #FFFDE6 */
   --brand-gray: 0 0% 25%;          /* #3F3F3F */
+  --canvas: 216 71% 98%;           /* #F8FAFD */
+  --canvas-alt: 214 57% 97%;       /* #F4F7FC */
   --surface: 57 65% 96%;           /* #FBF9EC */
   --border: 0 0% 90%;              /* #E6E6E6 */
   --state-error: 4 76% 40%;        /* #B42318 */
@@ -174,19 +188,20 @@ Tokens base para `globals.css` (formato HSL compatible con Tailwind/shadcn):
 
 ### 3.4 Tipografía
 
-- **Display / títulos:** Plus Jakarta Sans (geométrica, alineada con "Commercial Geometry").
-- **Cuerpo / UI:** Inter (legibilidad en pantalla).
-- Cargadas con `next/font/google`, variables CSS y `display: swap`.
-- Escala base: 16 px, line-height 1.6; títulos con tracking ajustado y pesos 600–700.
-- Propuesta sujeta a aprobación si el cliente cuenta con tipografías oficiales.
+- **Display y cuerpo:** Lato (400, 700 y 900), con personalidad humanista, cercana y profesional.
+- Cargada con `next/font/google`, variable CSS y `display: swap`.
+- Escala base: 16 px; titulares en pesos 700–900 con tracking ajustado.
+- El hero usa una escala editorial de 36 / 48 / 60 px según breakpoint.
+- Si el cliente cuenta con tipografías oficiales, se evalúa su incorporación sin cambiar la arquitectura.
 
 ### 3.5 Principios UI/UX
 
 - **Mobile-first:** la mayoría del tráfico será móvil; diseñar primero a 360 px.
-- **Emergencia siempre visible:** barra Gunmetal + CTA Buttercup + botón flotante de WhatsApp.
+- **Emergencia siempre visible:** top bar de urgencias, pill en el header y botón flotante de WhatsApp.
 - **Una acción principal por pantalla:** "Agendar cita"; secundarias: llamar, WhatsApp, ver sede.
-- **Clinical Warmth:** base blanca, acentos amarillos, fotografía real y microcopy amable.
-- **Sterile Order:** espacio en blanco generoso, grilla estricta, cero ornamentos innecesarios.
+- **Clinical Warmth:** base clara, acentos amarillos, fotografía real y microcopy amable.
+- **Sterile Order:** espacio en blanco generoso, jerarquía limpia, cero ornamentos innecesarios.
+- **Geometría orgánica:** formas curvas, radios amplios, divisores wave y retícula bento.
 - **Illustrated Whimsy:** personajes del logo e ilustraciones solo como acentos de personalidad.
 - **Saturated Cheer:** bloques de amarillo con texto Gunmetal; evitar amarillo detrás de texto blanco.
 - **Confianza visual:** nombres, especialidades, credenciales, instalaciones y testimonios reales.
@@ -296,7 +311,7 @@ dr_pet_web_redesign/
 │       │   ├── filters/              # Búsqueda, selects, pills
 │       │   ├── forms/                # Campos y errores compartidos
 │       │   ├── icons/                # Íconos de marca y redes
-│       │   ├── layout/               # Header, Footer, EmergencyBar, WhatsAppFab
+│       │   ├── layout/               # Header, DesktopNav, Footer, WhatsAppFab
 │       │   ├── sections/             # PageHero, CTA, SectionHeading, TrustStrip
 │       │   ├── seo/                  # JSON-LD y helpers de metadata
 │       │   └── ui/                   # Primitivas estilo shadcn/ui
@@ -431,10 +446,10 @@ Reglas de la capa:
 ### 5.7 Componentes previstos
 
 **Layout**
-- `Header`, `DesktopNav`, `MobileNav`, `MegaMenu`, `EmergencyBar`, `Footer`, `WhatsAppFab`, `Breadcrumbs`, `ScrollToTop`.
+- `TopBar`, `Header`, `DesktopNav`, `MobileNav`, `Footer`, `WhatsAppFab`, `Breadcrumbs`, `ScrollToTop`.
 
 **Sections**
-- `PageHero`, `SectionHeading`, `CtaBanner`, `TrustStrip`, `StatsBand`, `ContactStrip`, `RelatedContent`.
+- `PageHero`, `SectionHeading`, `CtaBanner`, `TrustStrip`, `StatsBand`, `ContactStrip`, `RelatedContent`, `WaveDivider`.
 
 **UI**
 - `button`, `card`, `badge`, `input`, `label`, `textarea`, `select`, `accordion`, `dialog`, `sheet`, `tabs`, `tooltip`, `skeleton`, `form`, `separator`, `avatar`, `breadcrumb`.
@@ -558,15 +573,17 @@ Los teléfonos y enlaces deben existir en un solo lugar. Ningún componente debe
 - [x] Definir contexto y alcance.
 - [x] Crear estructura de carpetas del frontend.
 - [x] Documentar arquitectura y convenciones.
-- [ ] Scaffolding de configuración (package.json, tsconfig, Tailwind, ESLint, Prettier).
-- [ ] Layout raíz, tokens y providers.
+- [x] Scaffolding de configuración (package.json, tsconfig, Tailwind, ESLint, Prettier).
+- [x] Layout raíz, tokens y providers base.
 
 ### Fase 1 — Base visual y Home
 
-- Header, EmergencyBar, Footer y WhatsAppFab.
-- Sistema de botones, cards, badges y tipografía.
-- Home completa con hero, propuesta de valor, servicios, sedes, testimonios y CTA.
-- Datos mock de home y servicios.
+- [x] Header con mega-menú, Footer y WhatsAppFab.
+- [x] Sistema de botones, cards, badges y tipografía Lato.
+- [x] Home completa con top bar, hero orgánico, trust bar, servicios bento, filosofía, plan, sucursales y CTA final.
+- [x] Datos mock de home, servicios, plan y sucursales.
+- [x] Divisores wave y geometría orgánica.
+- [ ] Testimonios y contenido editorial adicional.
 
 ### Fase 2 — Servicios, sedes y equipo
 

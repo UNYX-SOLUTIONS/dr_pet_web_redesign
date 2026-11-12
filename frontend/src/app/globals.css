@@ -41,6 +41,8 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    overflow-x: clip;
   }
 
   body {
@@ -69,5 +71,11 @@
 @layer utilities {
   .container-page {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .paw-pattern {
+    background-image: radial-gradient(#2a53a0 0.75px, transparent 0.75px);
+    background-size: 24px 24px;
+    opacity: 0.06;
   }
 }
