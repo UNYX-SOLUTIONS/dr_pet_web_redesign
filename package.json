@@ -1,0 +1,23 @@
+{
+  "name": "dr-pet-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Rediseño web de Dr. Pet — Clínica Veterinaria",
+  "packageManager": "pnpm@12.9.1",
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter frontend dev",
+    "build": "pnpm --filter frontend build",
+    "start": "pnpm --filter frontend start",
+    "lint": "pnpm --filter frontend lint",
+    "type-check": "pnpm --filter frontend type-check",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json,css,mjs,yaml,yml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md,json,css,mjs,yaml,yml}\""
+  },
+  "devDependencies": {
+    "prettier": "3.2.5"
+  }
+}
