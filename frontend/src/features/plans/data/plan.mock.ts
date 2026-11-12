@@ -17,7 +17,8 @@ export const HOME_PLAN: HomePlanContent = {
   ],
   primaryCta: {
     label: 'Conoce el Plan Consentido',
-    href: '/plan-consentido-protegido',
+    href: CONTACT.primaryWhatsApp.url,
+    external: true,
   },
   secondaryCta: {
     label: 'Descargar brochure',

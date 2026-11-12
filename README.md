@@ -94,6 +94,8 @@ La arquitectura completa, el contexto del negocio, la paleta oficial y el roadma
 
 - No hay backend ni autenticación. Los formularios se simularán con datos mock.
 - Los teléfonos y enlaces de sedes están centralizados en `frontend/src/config/contact.ts`.
+- Los CTAs de WhatsApp y “Contactar” usan el número demo **+593 99 520 3741** con el mensaje precargado **“Hola Dr Pet”** para el router `UNYX DEMO 00 - ROUTER KOMMO`. Los teléfonos de llamadas y emergencias siguen siendo reales.
+- Antes de producción, reemplazar el número demo por el WhatsApp oficial de Dr. Pet.
 - Los beneficios y el costo del Plan Consentido Protegido se tomaron del sitio oficial.
 - Los horarios por sede y la disponibilidad de emergencias 24/7 deben validarse con el cliente.
 - El logo actual es un PNG; se solicitó la versión SVG oficial para unificar el azul de marca.

@@ -1,5 +1,6 @@
 import { Clock, MapPin, MessageCircle, Navigation, Phone, Siren } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { CONTACT } from '@/config/contact';
 import type { LocationBadgeTone, LocationCardData } from '../types/location.types';
 import { MapPreview } from './MapPreview';
 
@@ -82,7 +83,7 @@ export function LocationCard({ location }: LocationCardProps) {
           </a>
         </Button>
         <Button size="sm" asChild>
-          <a href={location.whatsappUrl} target="_blank" rel="noreferrer">
+          <a href={CONTACT.primaryWhatsApp.url} target="_blank" rel="noreferrer">
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
             Contactar
           </a>

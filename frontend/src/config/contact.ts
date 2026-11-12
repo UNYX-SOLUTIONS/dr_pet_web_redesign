@@ -6,9 +6,11 @@ export interface ContactLocation {
   phoneTel: string | null;
   emergencyPhone: string;
   emergencyTel: string;
-  whatsappUrl: string;
   mapsUrl: string;
 }
+
+const WHATSAPP_DEMO_NUMBER = '593995203741';
+const WHATSAPP_DEMO_MESSAGE = 'Hola Dr Pet';
 
 export const CONTACT = {
   mainPhone: {
@@ -16,9 +18,10 @@ export const CONTACT = {
     tel: '+59342886519',
   },
   primaryWhatsApp: {
-    display: '098 636 3000',
-    internationalDisplay: '+593 98 636 3000',
-    url: 'https://wa.me/593986363000',
+    display: '+593 99 520 3741',
+    internationalDisplay: '+593 99 520 3741',
+    message: WHATSAPP_DEMO_MESSAGE,
+    url: `https://wa.me/${WHATSAPP_DEMO_NUMBER}?text=${encodeURIComponent(WHATSAPP_DEMO_MESSAGE)}`,
   },
   planBrochureUrl: 'https://drpet.com.ec/wp-content/uploads/2020/08/DrPet_Final.pdf',
 } as const;
@@ -38,7 +41,6 @@ export const LOCATIONS: ContactLocation[] = [
     phoneTel: '+593986363000',
     emergencyPhone: '098 636 3000',
     emergencyTel: '+593986363000',
-    whatsappUrl: 'https://wa.me/593986363000',
     mapsUrl:
       'https://www.google.com/maps/search/?api=1&query=Dr.+Pet+Urdesa+Circunvalacion+Sur+216+Guayaquil',
   },
@@ -50,7 +52,6 @@ export const LOCATIONS: ContactLocation[] = [
     phoneTel: '+593992762265',
     emergencyPhone: '096 252 3743',
     emergencyTel: '+593962523743',
-    whatsappUrl: 'https://wa.me/593992762265',
     mapsUrl:
       'https://www.google.com/maps/search/?api=1&query=Dr.+Pet+El+Dorado+Ciudad+Comercial+Guayaquil',
   },
@@ -62,7 +63,6 @@ export const LOCATIONS: ContactLocation[] = [
     phoneTel: '+593995048598',
     emergencyPhone: '099 841 7725',
     emergencyTel: '+593998417725',
-    whatsappUrl: 'https://wa.me/593995048598',
     mapsUrl:
       'https://www.google.com/maps/search/?api=1&query=Dr.+Pet+Via+a+la+Costa+Puerto+Azul+Guayaquil',
   },

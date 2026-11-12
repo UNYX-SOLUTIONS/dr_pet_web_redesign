@@ -518,6 +518,14 @@ Los teléfonos y enlaces deben existir en un solo lugar. Ningún componente debe
 4. Reemplazar selectores mock por hooks de consulta sin cambiar los componentes.
 5. Mantener los mismos tipos y schemas para validar la respuesta del servidor.
 
+### 6.5 Integración WhatsApp demo (Kommo)
+
+- Todos los CTAs de WhatsApp y “Contactar” apuntan a `+593 99 520 3741` con el mensaje precargado `Hola Dr Pet`.
+- El router `UNYX DEMO 00 - ROUTER KOMMO` valida el mensaje entrante, activa la IA y asigna la conversación al tipo de demo Dr. Pet para respuesta automática.
+- La configuración vive en `src/config/contact.ts` (`CONTACT.primaryWhatsApp`), única fuente de verdad.
+- Los teléfonos de llamadas y emergencias de las sedes no se modifican.
+- Este número es temporal para la demo; antes de producción debe reemplazarse por el WhatsApp oficial de Dr. Pet.
+
 ---
 
 ## 7. SEO, accesibilidad y rendimiento

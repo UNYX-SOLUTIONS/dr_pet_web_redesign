@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { ArrowRight, Download, PawPrint, ShieldPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { HOME_PLAN } from '../data/plan.mock';
@@ -49,11 +48,15 @@ export function HomePlanBanner() {
             <div className="flex w-full flex-col gap-4 sm:w-auto">
               <div className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-center">
                 <Button variant="accent" size="lg" asChild>
-                  <Link href={HOME_PLAN.primaryCta.href}>
+                  <a
+                    href={HOME_PLAN.primaryCta.href}
+                    target={HOME_PLAN.primaryCta.external ? '_blank' : undefined}
+                    rel={HOME_PLAN.primaryCta.external ? 'noreferrer' : undefined}
+                  >
                     <PawPrint className="h-5 w-5" aria-hidden="true" />
                     {HOME_PLAN.primaryCta.label}
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
+                  </a>
                 </Button>
 
                 <Button variant="inverse" size="lg" asChild>
