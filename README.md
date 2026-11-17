@@ -52,6 +52,54 @@ La aplicación queda disponible en `http://localhost:3000`.
 | `pnpm format`       | Formatea el código con Prettier            |
 | `pnpm format:check` | Verifica el formato sin modificar archivos |
 
+## Despliegue con Docker (VPS + Traefik)
+
+La imagen usa el build `standalone` de Next.js sobre Node 20 Alpine y corre como usuario sin privilegios. El contenedor no publica puertos: Traefik lo descubre por labels en la red `drpet-internal`.
+
+1. Crea el archivo de variables y ajusta el dominio:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   | Variable               | Descripción                                                    |
+   | ---------------------- | -------------------------------------------------------------- |
+   | `DRPET_DOMAIN`         | Dominio público sin protocolo (`drpet.demo.unyxsolutions.com`) |
+   | `TRAEFIK_ENTRYPOINT`   | Entrypoint de Traefik (default `websecure`)                    |
+   | `TRAEFIK_CERTRESOLVER` | Resolver de certificados (default `letsencrypt`)               |
+
+2. Levanta el servicio:
+
+   ```bash
+   docker compose up -d --build
+   ```
+
+3. Verifica estado y logs:
+
+   ```bash
+   docker compose ps
+   docker compose logs -f drpet-web
+   ```
+
+### Notas de despliegue
+
+- Traefik debe estar conectado a la red `drpet-internal` (igual que en el stack de referencia). Si usas una red externa compartida, cambia `networks` en `docker-compose.yml`:
+
+  ```yaml
+  services:
+    drpet-web:
+      networks:
+        - traefik-public
+
+  networks:
+    traefik-public:
+      external: true
+  ```
+
+- `NEXT_PUBLIC_SITE_URL` se embebe en el build (metadata, canonical, sitemap). Si cambias de dominio, reconstruye: `docker compose build --no-cache && docker compose up -d`.
+- El healthcheck consulta `/` cada 15s; el servicio queda `unhealthy` si Next.js no responde.
+- `.env` está en `.gitignore`; no se copia a la imagen (ver `.dockerignore`).
+
 ## Estructura
 
 ```text

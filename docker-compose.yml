@@ -1,0 +1,39 @@
+services:
+  # =========================================================
+  # FRONTEND - Dr. Pet / Next.js (standalone)
+  # =========================================================
+  drpet-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_SITE_URL: https://${DRPET_DOMAIN:?DRPET_DOMAIN requerido}
+    restart: always
+    environment:
+      NODE_ENV: production
+      PORT: '3000'
+      HOSTNAME: 0.0.0.0
+      NEXT_TELEMETRY_DISABLED: '1'
+      NEXT_PUBLIC_SITE_URL: https://${DRPET_DOMAIN:?DRPET_DOMAIN requerido}
+      TZ: America/Guayaquil
+    networks:
+      - drpet-internal
+    labels:
+      traefik.enable: 'true'
+      # Comillas dobles internas: argumentos válidos para el parser de Traefik.
+      traefik.http.routers.drpet-web.rule: 'Host("${DRPET_DOMAIN:?DRPET_DOMAIN requerido}")'
+      traefik.http.routers.drpet-web.entrypoints: ${TRAEFIK_ENTRYPOINT:-websecure}
+      traefik.http.routers.drpet-web.tls: 'true'
+      traefik.http.routers.drpet-web.tls.certresolver: ${TRAEFIK_CERTRESOLVER:-letsencrypt}
+      traefik.http.routers.drpet-web.service: drpet-web
+      traefik.http.services.drpet-web.loadbalancer.server.port: '3000'
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -qO- http://127.0.0.1:3000/ > /dev/null 2>&1 || exit 1']
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+networks:
+  drpet-internal:
+    driver: bridge
